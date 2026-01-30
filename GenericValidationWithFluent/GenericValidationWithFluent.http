@@ -5,6 +5,23 @@ Accept: application/json
 
 ###
 
+# ============================================
+# AutoMapper Examples
+# ============================================
+
+# Get All Products (maps to ProductListItemDTO)
+GET {{GenericValidationWithFluent_HostAddress}}/products/
+Accept: application/json
+
+###
+
+# Get Single Product (maps to ProductResponseDTO with nested Category)
+GET {{GenericValidationWithFluent_HostAddress}}/products/1
+Accept: application/json
+
+###
+
+# Create Product (CreateProductDTO -> Product -> ProductResponseDTO)
 POST {{GenericValidationWithFluent_HostAddress}}/products/
 Content-Type: application/json
 
@@ -17,6 +34,53 @@ Content-Type: application/json
 
 ###
 
+# Update Product (UpdateProductDTO -> Product -> ProductResponseDTO)
+PUT {{GenericValidationWithFluent_HostAddress}}/products/
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Laptop",
+  "description": "Updated high performance laptop with SSD",
+  "price": 1299.99,
+  "quantity": 5
+}
+
+###
+
+# ============================================
+# Keyed Services Examples
+# ============================================
+
+# Test Notification via Email (Keyed Service: "email")
+POST {{GenericValidationWithFluent_HostAddress}}/products/1/notify?channel=email
+Accept: application/json
+
+###
+
+# Test Notification via SMS (Keyed Service: "sms")
+POST {{GenericValidationWithFluent_HostAddress}}/products/1/notify?channel=sms
+Accept: application/json
+
+###
+
+# Test Notification via Push (Keyed Service: "push")
+POST {{GenericValidationWithFluent_HostAddress}}/products/1/notify?channel=push
+Accept: application/json
+
+###
+
+# Test Invalid Channel
+POST {{GenericValidationWithFluent_HostAddress}}/products/1/notify?channel=invalid
+Accept: application/json
+
+###
+
+# ============================================
+# Validation Examples
+# ============================================
+
+# Validation Error - Empty fields
 POST {{GenericValidationWithFluent_HostAddress}}/products/
 Content-Type: application/json
 
@@ -29,6 +93,7 @@ Content-Type: application/json
 
 ###
 
+# Validation Error - Name too long
 POST {{GenericValidationWithFluent_HostAddress}}/products/
 Content-Type: application/json
 
@@ -79,3 +144,23 @@ Content-Type: application/json
 }
 
 ###
+
+
+POST http://127.0.0.1:5001/tzlamim/us-central1/api/genedateDoch1
+Content-Type: application/json
+
+{
+  "needToLock":false
+}
+###
+POST https://doch1generator-165122593351.us-central1.run.app/generateReportNoUgda
+Content-Type: application/json
+
+
+{
+  "viewLink":"https://drive.google.com/file/d/1GdBX2JO_I6jQ41eQBS7pzMavefVx-rHR/view?usp=drivesdk",
+  "contentLink":"https://drive.google.com/uc?id=1GdBX2JO_I6jQ41eQBS7pzMavefVx-rHR&export=download"
+}
+
+
+
